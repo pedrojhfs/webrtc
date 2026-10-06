@@ -1,4 +1,5 @@
 name: CI
+# fork-only control run: unchanged upstream main
 
 on:
   push:
