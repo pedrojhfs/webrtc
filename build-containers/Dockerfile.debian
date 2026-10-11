@@ -6,7 +6,12 @@ FROM node:${NODE_VERSION}-${DEBIAN_VERSION}
 ARG DEBIAN_VERSION
 
 RUN if [ "$DEBIAN_VERSION" = "bullseye" ]; then \
-      echo "deb https://archive.debian.org/debian bullseye-backports main" >> /etc/apt/sources.list; \
+      printf '%s\n' \
+        "deb https://archive.debian.org/debian bullseye main" \
+        "deb https://archive.debian.org/debian bullseye-updates main" \
+        "deb https://archive.debian.org/debian-security bullseye-security main" \
+        "deb https://archive.debian.org/debian bullseye-backports main" \
+        > /etc/apt/sources.list; \
     fi && \
   apt-get update && \
   apt-get install -y --no-install-recommends \
